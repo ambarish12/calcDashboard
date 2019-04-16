@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard Calc</title>
+    <!-- optional fonts for styling -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body ng-app="dashboardApp">
+    <header>Dashboard</header>
+    <section ng-controller="dashboardCtrl">
+
+        <div class="display-flex center-center">
+            <div class="total-budget">
+                <label for="totalBudget">Total Budget</label>
+                <input type="number" id="totalBudget" ng-model="totalBudget">
+            </div>
+            <div class="filter-area">
+                <div>Filters</div>
+                <div class="filters" ng-click="selectFilter(4)">4 weeks</div>
+                <div class="filters" ng-click="selectFilter(8)">8 weeks</div>
+                <div class="filters" ng-click="selectFilter(12)">12 weeks</div>
+                <div class="filters" ng-click="selectFilter(16)">16 weeks</div>
+            </div>
+        </div>
+
+        <div class="categories">
+            <div class="category">
+                <label for="traditional">Traditional</label>
+                <input type="number" id="traditional" ng-model="traditional">
+            </div>
+            <div class="category">
+                <label for="digital">Digital</label>
+                <input type="number" id="digital" ng-model="digital">
+            </div>
+            <div class="category">
+                <label for="hispanic">Hispanic</label>
+                <input type="number" id="hispanic" ng-model="hispanic">
+            </div>
+            <div class="category-validator" ng-class="validateCategoryInput()">
+                {{categoryValidator}}
+            </div>
+        </div>
+        <div class="sub-categories">
+            <div ng-repeat="subCat in subCategories">
+                <div class="sub-category">
+                    <label for="traditional{{subCat.label}}">{{subCat.label}}</label>
+                    <input type="number" id="traditional{{subCat.label}}" ng-model="subCat.value">
+                    <label for="traditional{{subCat.label}}">{{subCat.label2}}</label>
+                    <input type="number" id="traditional2{{subCat.label}}" ng-model="subCat.value2">
+                </div>
+            </div>
+        </div>
+        <!-- <div class="calc-table">
+                
+            <div class="calc-row" ng-repeat="cat in cats">
+                    <div class="calc-col" ng-repeat="week in weeks">
+                        {{cat}}{{week}}
+                        <select ng-model="selectedCatOption" ng-options="option.label for option in catOptions"></select>
+                    </div>
+            </div>
+            
+        </div> -->
+        <table>
+            <thead>
+                <th>Categories</th>
+                <th ng-repeat="week in weeks">{{week}}</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="cat in cats">
+                    <td>{{cat}}</td>
+                    <td ng-repeat="week in weeks">
+                        <select ng-model="selectedCatOption" ng-options="option.label for option in catOptions"></select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <footer class="display-flex center-center">copyright</footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
